@@ -9,7 +9,7 @@ const accessToken = process.env.TOKEN;
 const myToken = process.env.MYTOKEN;
 app.use(bodyParser.json());
 
-app.listen(3000 || process.env.PORT, (req, res) => {
+app.listen(process.env.PORT, (req, res) => {
   console.log("server is listening");
 });
 
