@@ -5,11 +5,12 @@ const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 const accessToken = process.env.TOKEN;
 const myToken = process.env.MYTOKEN;
 app.use(bodyParser.json());
 
-app.listen(process.env.PORT, (req, res) => {
+app.listen(port, "0.0.0.0", (req, res) => {
   console.log("server is listening");
 });
 
