@@ -25,8 +25,7 @@ app.get("/webhook", (req, res) => {
 
   if (hubMode && token) {
     if (hubMode === "subscribe" && token === myToken) {
-      let responseIf = res.status(200).send(hubChallenge);
-      console.log(responseIf);
+      res.status(200).send(hubChallenge);
     } else {
       res.status(403);
     }
@@ -35,6 +34,7 @@ app.get("/webhook", (req, res) => {
 
 app.post("/webhook", (req, res) => {
   let bodyParam = req.body;
+  console.log(bodyParam);
   console.log(JSON.stringify(bodyParam, null, 2));
   if (bodyParam.object) {
     if (
