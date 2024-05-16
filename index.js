@@ -37,12 +37,14 @@ app.post("/webhook", (req, res) => {
   console.log(bodyParam);
   console.log(JSON.stringify(bodyParam, null, 2));
   if (bodyParam.object) {
+    console.log("inside first log");
     if (
       bodyParam.entry &&
       bodyParam.entry[0].changes &&
       bodyParam.entry[0].changes[0].value.message &&
       bodyParam.entry[0].changes[0].value.message[0]
     ) {
+      console.log("inside second log");
       let myPhoneID =
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
       let fromNum = bodyParam.entry[0].changes[0].message[0].from;
