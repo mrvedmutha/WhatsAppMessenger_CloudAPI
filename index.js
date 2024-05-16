@@ -23,48 +23,48 @@ app.get("/webhook", (req, res) => {
   let hubChallenge = req.query["hub.challenge"];
   let token = req.query["hub.verify_token"];
 
-  if (hubMode && token) {
-    if (hubMode === "subscribe" && token === myToken) {
-      res.status(200).send(hubChallenge);
-    } else {
-      res.status(403);
-    }
+  if (hubMode && token === myToken) {
+    res.status(200).send(hubChallenge);
+  } else {
+    res.status(403).send(`Forbidden!`);
   }
 });
 
-app.post("/webhook", (req, res) => {
+app.post("/webhook", async (req, res) => {
   let bodyParam = req.body;
-  console.log(bodyParam);
-  console.log(JSON.stringify(bodyParam, null, 2));
+  console.log("Received webhook event:", JSON.stringify(bodyParam, null, 2));
   if (bodyParam.object) {
-    console.log("inside first log");
     if (
       bodyParam.entry &&
       bodyParam.entry[0].changes &&
       bodyParam.entry[0].changes[0].value.message &&
       bodyParam.entry[0].changes[0].value.message[0]
     ) {
-      console.log("inside second log");
-      let myPhoneID =
+      const message = body.entry[0].changes[0].value.messages[0];
+      console.log("Received message:", JSON.stringify(message, null, 2));
+      const myPhoneID =
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
-      let fromNum = bodyParam.entry[0].changes[0].message[0].from;
-      let messageBody = bodyParam.entry[0].changes[0].message[0].text.body;
-      axios({
-        method: "POST",
-        url: `https://graph.facebook.com/v19.0/${myPhoneID}/messages?access_token=${accessToken}`,
-        data: {
-          messaging_product: "whatsapp",
-          to: fromNum,
-          text: {
-            body: "Hi...This is test message",
-          },
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      });
+      const fromNum = bodyParam.entry[0].changes[0].message[0].from;
+      const messageBody = message.text.body;
+      const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages?access_token=${accessToken}`;
+      const responseMessage = {
+        messaging_product: "whatsapp",
+        to: from,
+        text: { body: "Hello! This is an automated response." },
+      };
+      try {
+        await axios.post(url, responseMessage, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("Message sent successfully");
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
     }
-    res.sendStatus(200);
   } else {
     res.sendStatus(404);
   }
