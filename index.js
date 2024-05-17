@@ -60,7 +60,10 @@ app.post("/webhook", async (req, res) => {
           JSON.stringify(responseMessage, null, 2)
         );
         await axios.post(url, responseMessage, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         });
         console.log("Message sent successfully");
       } catch (error) {
@@ -78,6 +81,6 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-app.listen(port, "0.0.0.0", (req, res) => {
+app.listen(port, "0.0.0.0", () => {
   console.log("server is listening");
 });
