@@ -81,4 +81,3 @@ app.post("/webhook", async (req, res) => {
 app.listen(port, "0.0.0.0", (req, res) => {
   console.log("server is listening");
 });
-console.log("start");
