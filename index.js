@@ -37,12 +37,7 @@ app.post("/webhook", async (req, res) => {
   console.log("Received webhook event:", JSON.stringify(bodyParam, null, 2));
   if (bodyParam.object) {
     console.log("Inside Body Param");
-    if (
-      bodyParam.entry &&
-      bodyParam.entry[0].changes &&
-      bodyParam.entry[0].changes[0].value.messages &&
-      bodyParam.entry[0].changes[0].value.messages[0]
-    ) {
+    if (bodyParam.entry[0].changes[0].value.messages[0]) {
       console.log("Body param validated");
       let message = body.entry[0].changes[0].value.messages[0];
       console.log("Received message:", JSON.stringify(message, null, 2));
