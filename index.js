@@ -33,7 +33,7 @@ app.get("/webhook", (req, res) => {
 });
 
 app.post("/webhook", async (req, res) => {
-  let bodyParam = req.body;
+  let bodyParam = await req.body;
   console.log("Received webhook event:", JSON.stringify(bodyParam, null, 2));
   if (bodyParam.object) {
     console.log("Inside Body Param");
