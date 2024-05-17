@@ -40,8 +40,8 @@ app.post("/webhook", async (req, res) => {
     if (
       bodyParam.entry &&
       bodyParam.entry[0].changes &&
-      bodyParam.entry[0].changes[0].value.message &&
-      bodyParam.entry[0].changes[0].value.message[0]
+      bodyParam.entry[0].changes[0].value.messages &&
+      bodyParam.entry[0].changes[0].value.messages[0]
     ) {
       console.log("Body param validated");
       let message = body.entry[0].changes[0].value.messages[0];
@@ -51,7 +51,7 @@ app.post("/webhook", async (req, res) => {
       let fromNum = bodyParam.entry[0].changes[0].message[0].from;
       let messageBody = message.text.body;
       const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages`;
-      let responseMessage = {
+      const responseMessage = {
         messaging_product: "whatsapp",
         to: fromNum,
         text: { body: "Hello! This is an automated response." },
