@@ -51,7 +51,7 @@ app.post("/webhook", async (req, res) => {
       const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages?access_token=${accessToken}`;
       const responseMessage = {
         messaging_product: "whatsapp",
-        to: from,
+        to: fromNum,
         text: { body: "Hello! This is an automated response." },
       };
       try {
