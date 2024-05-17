@@ -44,7 +44,7 @@ app.post("/webhook", async (req, res) => {
       bodyParam.entry[0].changes[0].value.messages[0]
     ) {
       console.log("Body param validated");
-      let message = body.entry[0].changes[0].value.messages[0];
+      let message = bodyParam.entry[0].changes[0].value.messages[0];
       console.log("Received message:", JSON.stringify(message, null, 2));
       let myPhoneID =
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
