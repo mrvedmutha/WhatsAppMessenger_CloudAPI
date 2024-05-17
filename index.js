@@ -59,14 +59,14 @@ app.post("/webhook", async (req, res) => {
           "Sending response message:",
           JSON.stringify(responseMessage, null, 2)
         );
-        await axios.post(url, responseMessage, {
+        await axios({
+          method: "POST",
+          url: url,
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          data: {
-            responseMessage,
-          },
+          data: { responseMessage },
         });
         console.log("Message sent successfully");
       } catch (error) {
