@@ -35,7 +35,6 @@ app.get("/webhook", (req, res) => {
 app.post("/webhook", async (req, res) => {
   let bodyParam = await req.body;
   if (bodyParam.object) {
-    console.log("Inside Body Param");
     if (
       bodyParam.entry &&
       bodyParam.entry[0].changes &&
