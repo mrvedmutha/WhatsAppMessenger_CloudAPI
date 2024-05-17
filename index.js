@@ -48,7 +48,7 @@ app.post("/webhook", async (req, res) => {
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
       const fromNum = bodyParam.entry[0].changes[0].message[0].from;
       const messageBody = message.text.body;
-      const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages?access_token=${accessToken}`;
+      const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages`;
       const responseMessage = {
         messaging_product: "whatsapp",
         to: fromNum,
