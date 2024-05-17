@@ -32,57 +32,87 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-app.post("/webhook", async (req, res) => {
-  let bodyParam = req.body;
-  console.log("Received webhook event:", JSON.stringify(bodyParam, null, 2));
-  if (bodyParam.object) {
-    if (
-      bodyParam.entry &&
-      bodyParam.entry[0].changes &&
-      bodyParam.entry[0].changes[0].value.message &&
-      bodyParam.entry[0].changes[0].value.message[0]
-    ) {
-      const message = body.entry[0].changes[0].value.messages[0];
-      console.log("Received message:", JSON.stringify(message, null, 2));
-      const myPhoneID =
-        bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
-      const fromNum = bodyParam.entry[0].changes[0].message[0].from;
-      const messageBody = message.text.body;
-      const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages`;
-      const responseMessage = {
-        messaging_product: "whatsapp",
-        to: fromNum,
-        text: { body: "Hello! This is an automated response." },
-      };
-      try {
-        console.log(
-          "Sending response message:",
-          JSON.stringify(responseMessage, null, 2)
-        );
-        await axios({
-          method: "POST",
-          url: url,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          data: { responseMessage },
-        });
-        console.log("Message sent successfully");
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
+// app.post("/webhook", async (req, res) => {
+//   let bodyParam = req.body;
+//   console.log("Received webhook event:", JSON.stringify(bodyParam, null, 2));
+//   if (bodyParam.object) {
+//     if (
+//       bodyParam.entry &&
+//       bodyParam.entry[0].changes &&
+//       bodyParam.entry[0].changes[0].value.message &&
+//       bodyParam.entry[0].changes[0].value.message[0]
+//     ) {
+//       const message = body.entry[0].changes[0].value.messages[0];
+//       console.log("Received message:", JSON.stringify(message, null, 2));
+//       const myPhoneID =
+//         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
+//       const fromNum = bodyParam.entry[0].changes[0].message[0].from;
+//       const messageBody = message.text.body;
+//       const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages`;
+//       const responseMessage = {
+//         messaging_product: "whatsapp",
+//         to: fromNum,
+//         text: { body: "Hello! This is an automated response." },
+//       };
+//       try {
+//         console.log(
+//           "Sending response message:",
+//           JSON.stringify(responseMessage, null, 2)
+//         );
+//         await axios({
+//           method: "POST",
+//           url: url,
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             "Content-Type": "application/json",
+//           },
+//           data: { responseMessage },
+//         });
+//         console.log("Message sent successfully");
+//       } catch (error) {
+//         console.error("Error sending message:", error);
+//       }
 
-      res.sendStatus(200);
-    } else {
-      console.log("No message found in the webhook event");
-      res.sendStatus(404);
-    }
-  } else {
-    console.log("Webhook event object not found");
-    res.sendStatus(404);
-  }
+//       res.sendStatus(200);
+//     } else {
+//       console.log("No message found in the webhook event");
+//       res.sendStatus(404);
+//     }
+//   } else {
+//     console.log("Webhook event object not found");
+//     res.sendStatus(404);
+//   }
+// });
+
+var data = JSON.stringify({
+  messaging_product: "whatsapp",
+  recipient_type: "individual",
+  to: "919941864844",
+  type: "text",
+  text: {
+    preview_url: false,
+    body: "text-message-content",
+  },
 });
+
+var config = {
+  method: "post",
+  url: "https://graph.facebook.com/v19.0/105241112240368/messages",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization:
+      "Bearer EAAIPEey6O9sBOZBpQLzLDDk7rpOU65gxlybLSLhsbaXIcZBoheX6ExGPTD0tGXU1WVutDz8d6NCUawIxtssRNkGrErPT1FDPvwBp6QWitEVXhIMLgIMsHNv0BRS48tWX3FUj7L8vVMAELW7mvnq5aOsFVRPgwwT0af4OpgiZB0GzdTGUa3HJeUSQd7hkHHSIMqGsgsKem0dWBYz1E0ZD",
+  },
+  data: data,
+};
+
+axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 app.listen(port, "0.0.0.0", () => {
   console.log("server is listening");
