@@ -64,6 +64,9 @@ app.post("/webhook", async (req, res) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
+          data: {
+            responseMessage,
+          },
         });
         console.log("Message sent successfully");
       } catch (error) {
