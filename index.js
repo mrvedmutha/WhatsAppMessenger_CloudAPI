@@ -48,7 +48,7 @@ app.post("/webhook", async (req, res) => {
       console.log("Received message:", JSON.stringify(message, null, 2));
       let myPhoneID =
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
-      let fromNum = bodyParam.entry[0].changes[0].message[0].from;
+      let fromNum = bodyParam.entry[0].changes[0].messages[0].from;
       let messageBody = message.text.body;
       const url = `https://graph.facebook.com/v19.0/${myPhoneID}/messages`;
       const responseMessage = {
@@ -65,7 +65,7 @@ app.post("/webhook", async (req, res) => {
           method: "POST",
           url: url,
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
           data: responseMessage,
