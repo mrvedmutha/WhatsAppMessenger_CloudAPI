@@ -145,7 +145,7 @@ app.post("/webhook", async (req, res) => {
 
       // Use your WhatsApp Cloud API access token
       const token = process.env.TOKEN;
-      const url = `https://graph.facebook.com/v19.0/${phone_number_id}/messages`;
+      const url = `https://graph.facebook.com/v14.0/${phone_number_id}/messages`;
 
       const responseMessage = {
         messaging_product: "whatsapp",
