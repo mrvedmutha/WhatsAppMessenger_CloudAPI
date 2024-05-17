@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const accessToken = process.env.TOKEN;
 const myToken = process.env.MYTOKEN;
+const processedMessages = new Set();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -43,6 +44,13 @@ app.post("/webhook", async (req, res) => {
     ) {
       console.log("Body param validated");
       let message = bodyParam.entry[0].changes[0].value.messages[0];
+      let messageId = message.id;
+      if (processedMessages.has(messageId)) {
+        console.log(`Message ${messageId} already processed`);
+        res.sendStatus(200);
+        return;
+      }
+      processedMessages.add(messageId);
       console.log("Received message:", JSON.stringify(message, null, 2));
       let myPhoneID =
         bodyParam.entry[0].changes[0].value.metadata.phone_number_id;
