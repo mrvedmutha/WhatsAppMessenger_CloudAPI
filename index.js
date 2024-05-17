@@ -75,9 +75,6 @@ app.post("/webhook", async (req, res) => {
       }
 
       res.sendStatus(200);
-    } else {
-      console.log("No message found in the webhook event");
-      res.sendStatus(404);
     }
   } else {
     console.log("Webhook event object not found");
