@@ -99,7 +99,7 @@ const axios = require("axios");
 const app = express();
 app.use(bodyParser.json());
 
-const verifyToken = process.env.TOKEN; // Set a verify token for webhook verification
+const verifyToken = process.env.MYTOKEN; // Set a verify token for webhook verification
 
 // Endpoint to handle the webhook verification
 app.get("/webhook", (req, res) => {
