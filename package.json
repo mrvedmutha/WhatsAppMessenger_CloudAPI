@@ -1,11 +1,16 @@
 {
+  "engines": {
+    "node": "22.1.0"
+  },
   "name": "whatsappcloud_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "build": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css",
+    "watch": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css --watch",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +19,11 @@
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "ejs-mate": "^4.0.0",
     "express": "^4.19.2",
-    "mongoose": "^8.3.5"
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "daisyui": "^4.12.2"
   }
 }
