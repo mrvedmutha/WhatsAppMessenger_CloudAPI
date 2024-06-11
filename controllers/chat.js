@@ -93,3 +93,21 @@ module.exports.verifyWebhook = (req, res) => {
     res.status(403).send(`Forbidden!`);
   }
 };
+
+module.exports.getChats = async (req, res) => {
+  const { user, contact } = req.query;
+
+  try {
+    const chats = await Message.find({
+      $or: [
+        { from: user, to: contact },
+        { from: contact, to: user },
+      ],
+    }).sort({ timestamp: 1 });
+
+    res.json(chats);
+  } catch (error) {
+    console.error("Error retrieving chats:", error);
+    res.sendStatus(500);
+  }
+};
