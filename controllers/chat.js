@@ -1,4 +1,5 @@
 const Message = require("../models/chat.js");
+const User = require("../models/user.js");
 const axios = require("axios");
 require("dotenv").config();
 const accessToken = process.env.ACCESS_TOKEN; // Add your access token here
@@ -63,6 +64,7 @@ module.exports.webhook = async (req, res) => {
         message: messageBody,
         to: value.metadata.display_phone_number,
       });
+
       await newMessage.save();
     }
 
@@ -98,6 +100,7 @@ module.exports.getChats = async (req, res) => {
   try {
     const allChats = await Message.find().sort({ timestamp: 1 });
     res.json(allChats);
+    res.render("");
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);

@@ -14,6 +14,10 @@ const chatSchema = new Schema(
       type: String,
       required: true, // Adding required to ensure messages are stored correctly
     },
+    contact: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 ); // This will automatically add `created_at` and `updated_at` fields
