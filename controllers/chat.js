@@ -29,7 +29,7 @@ module.exports.sendMessage = async (req, res) => {
     await axios.post(url, responseMessage, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    let user = await User.findOne({ waid: to });
+    let user = await User.findOne({ waId: to });
     if (!user) {
       user = new User({ waId: to, name: "New User" });
       await user.save();
