@@ -97,7 +97,7 @@ module.exports.verifyWebhook = (req, res) => {
 module.exports.getChats = async (req, res) => {
   try {
     const allChats = await Message.find().sort({ timestamp: 1 });
-    res.json(chats);
+    res.json(allChats);
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
