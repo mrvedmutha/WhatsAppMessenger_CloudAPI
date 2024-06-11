@@ -18,6 +18,7 @@ const chatSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    msg_is: String,
   },
   { timestamps: true }
 ); // This will automatically add `created_at` and `updated_at` fields
