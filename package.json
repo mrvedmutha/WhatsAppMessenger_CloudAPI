@@ -7,10 +7,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css",
+    "start": "node app.js",
+    "build:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css",
     "watch": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css --watch",
-    "start": "node app.js"
+    "build": "npm run build:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
