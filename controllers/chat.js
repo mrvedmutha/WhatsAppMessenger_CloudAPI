@@ -34,7 +34,7 @@ module.exports.sendMessage = async (req, res) => {
       user = new User({ waId: to, name: "New User" });
       await user.save();
     }
-    const newMessage = new Message({ from, to, message });
+    const newMessage = new Message({ from, to, message, user });
     await newMessage.save();
     console.log(
       "Received webhook event:",
@@ -67,7 +67,7 @@ module.exports.webhook = async (req, res) => {
       console.log("Received message from:", from);
       console.log("Message body:", messageBody);
 
-      await User.updateOne(
+      const updatedUser = await User.updateOne(
         { waId: from },
         { $set: { waId: from, name: contactName } },
         { upsert: true }
@@ -77,6 +77,7 @@ module.exports.webhook = async (req, res) => {
         from,
         message: messageBody,
         to: value.metadata.display_phone_number,
+        contact: updatedUser,
       });
 
       await newMessage.save();
