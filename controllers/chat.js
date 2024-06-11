@@ -61,7 +61,7 @@ module.exports.webhook = async (req, res) => {
       const newMessage = new Message({
         from,
         message: messageBody,
-        to: process.env.MY_PHONE_ID,
+        to: value.metadata.display_phone_number,
       });
       await newMessage.save();
     }
