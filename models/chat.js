@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 const chatSchema = new mongoose.Schema(
   {
     from: {
-      type: String,
+      type: Number,
+      default: 914445008192,
     },
     to: {
-      type: String,
+      type: Number,
       required: true,
     },
     message: {
