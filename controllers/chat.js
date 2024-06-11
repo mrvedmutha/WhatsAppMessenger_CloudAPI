@@ -29,12 +29,11 @@ module.exports.sendMessage = async (req, res) => {
     await axios.post(url, responseMessage, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    const contactName = "New User";
-    await User.updateOne(
-      { waId: to },
-      { waID: to, name: contactName },
-      { upsert: true }
-    );
+    let user = await User.findOne({ waid: to });
+    if (!user) {
+      user = new User({ waId: to, name: "New User" });
+      await user.save();
+    }
     const newMessage = new Message({ from, to, message });
     await newMessage.save();
     console.log(
@@ -70,7 +69,7 @@ module.exports.webhook = async (req, res) => {
 
       await User.updateOne(
         { waId: from },
-        { waId: from, name: contactName },
+        { $set: { waId: from, name: contactName } },
         { upsert: true }
       );
 
