@@ -95,16 +95,8 @@ module.exports.verifyWebhook = (req, res) => {
 };
 
 module.exports.getChats = async (req, res) => {
-  const { user, contact } = req.query;
-
   try {
-    const chats = await Message.find({
-      $or: [
-        { from: user, to: contact },
-        { from: contact, to: user },
-      ],
-    }).sort({ timestamp: 1 });
-
+    const allChats = await Message.find().sort({ timestamp: 1 });
     res.json(chats);
   } catch (error) {
     console.error("Error retrieving chats:", error);
