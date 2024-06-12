@@ -1496,3 +1496,10 @@ html {
 .gap-2 {
   gap: 0.5rem;
 }
+
+.sidebar{
+  background-color: aquamarine;
+}
+.conversation{
+  background-color: aqua;
+}
