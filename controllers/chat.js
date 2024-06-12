@@ -6,9 +6,17 @@ const accessToken = process.env.ACCESS_TOKEN; // Add your access token here
 const myToken = process.env.VERIFY_TOKEN;
 
 module.exports.getChats = async (req, res) => {
+  // try {
+  //   const chats = await Message.find().sort({ timestamp: -1 });
+  //   res.json(chats);
+  // } catch (error) {
+  //   console.error("Error retrieving chats:", error);
+  //   res.sendStatus(500);
+  // }
   try {
-    const chats = await Message.find().sort({ timestamp: -1 });
-    res.json(chats);
+    const allChats = await Message.find().sort({ timestamp: 1 });
+    res.json(allChats);
+    res.render("./chats/showMessage.ejs", { allChats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
@@ -117,13 +125,13 @@ module.exports.verifyWebhook = (req, res) => {
   }
 };
 
-module.exports.getChats = async (req, res) => {
-  try {
-    const allChats = await Message.find().sort({ timestamp: 1 });
-    res.json(allChats);
-    res.render("./chats/showMessage.ejs", { allChats });
-  } catch (error) {
-    console.error("Error retrieving chats:", error);
-    res.sendStatus(500);
-  }
-};
+// module.exports.getChats = async (req, res) => {
+//   try {
+//     const allChats = await Message.find().sort({ timestamp: 1 });
+//     res.json(allChats);
+//     res.render("./chats/showMessage.ejs", { allChats });
+//   } catch (error) {
+//     console.error("Error retrieving chats:", error);
+//     res.sendStatus(500);
+//   }
+// };
