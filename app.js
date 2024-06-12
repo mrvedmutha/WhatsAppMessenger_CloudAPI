@@ -27,11 +27,11 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.render("./chats/showMessage.ejs");
+  res.render("./chats/showMessages.ejs");
 });
 
 app.get("/chats/new", (req, res) => {
-  res.render("./chats/sendMessages.ejs");
+  res.render("./chats/sendMessage.ejs");
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
