@@ -7,9 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:css && node app.js",
-    "build:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css",
-    "watch:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/main.css --watch",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,13 +17,11 @@
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "ejs-mate": "^4.0.0",
     "express": "^4.19.2",
     "mongoose": "^8.4.1",
     "postcss": "^8.4.38"
-  },
-  "devDependencies": {
-    "daisyui": "^4.12.2"
   }
 }

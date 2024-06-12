@@ -1,18 +1,20 @@
 <% layout("./layouts/boilerplate") %>
 <form method="POST" action="/api/send">
-  <label class="input input-bordered flex items-center gap-2">
-    Phone Number (From)
-    <input type="number" class="grow" placeholder="91xxxxxxxxxx" name="from" value="914445008192" disabled />
-  </label>
-  <label class="input input-bordered flex items-center gap-2">
-    Phone Number (To)
-    <input type="number" class="grow" placeholder="91xxxxxxxxxx" name="to" required />
-  </label>
-  <textarea
-    placeholder="Your message"
-    class="textarea textarea-bordered textarea-sm w-full max-w-xs"
-    name="message"
-    required
-  ></textarea>
-  <button type="submit" class="btn btn-active btn-wide btn-accent">Send Message</button>
+  <div class="row container">
+    <div class="col-8 offset-2">
+      <div class="mb-3">
+        <label for="from" class="form-label">Phone Number (From):</label>
+        <input type="number" class="form-control" name="from" id="exampleFormControlInput1" placeholder="+91xxxxxxxxxx" value="914445008192" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="to" class="form-label">Phone Number (To):</label>
+        <input type="number" class="form-control" name="to" id="exampleFormControlInput1" placeholder="+91xxxxxxxxxx">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="10"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
+  </div>
 </form>
