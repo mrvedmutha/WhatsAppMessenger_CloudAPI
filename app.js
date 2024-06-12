@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/chats/new", (req, res) => {
-  res.render("./chats/sendMessage.ejs");
+  res.render("./chats/sendMessages.ejs");
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
