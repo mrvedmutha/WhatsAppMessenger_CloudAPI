@@ -27,7 +27,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("./chats/showMessage.ejs");
 });
 
 app.get("/chats/new", (req, res) => {
