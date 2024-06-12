@@ -31,15 +31,15 @@ module.exports.sendMessage = async (req, res) => {
     });
     let user = await User.findOne({ waId: to });
     if (!user) {
-      user = new User({ waId: to, name: "New User" });
+      user = new User({ waId: to._id, name: "New User" });
       await user.save();
     }
     const newMessage = new Message({
-      from,
-      to,
+      from: from._id,
+      to: to._id,
       message,
       contact: user._id,
-      msg_is: "Send",
+      msg_is: "Sent",
     });
     await newMessage.save();
     console.log(
@@ -68,7 +68,7 @@ module.exports.webhook = async (req, res) => {
       const messageBody = message.text.body;
       const contact = value.contacts[0];
       const contactName = contact.profile.name;
-      const waId = contact.wa_id;
+      const displayPhNum = value.metadata.display_phone_number;
 
       console.log("Received message from:", from);
       console.log("Message body:", messageBody);
@@ -80,9 +80,9 @@ module.exports.webhook = async (req, res) => {
       );
 
       const newMessage = new Message({
-        from,
+        from: from._id,
+        to: displayPhNum._id,
         message: messageBody,
-        to: value.metadata.display_phone_number,
         contact: user._id,
         msg_is: "Received",
       });
