@@ -74,8 +74,8 @@ module.exports.webhook = async (req, res) => {
       console.log("Message body:", messageBody);
 
       let user = await User.findOneAndUpdate(
-        { waId: from },
-        { waId: from, name: contactName },
+        { waId: from._id },
+        { name: contactName },
         { new: true, upsert: true }
       );
 
