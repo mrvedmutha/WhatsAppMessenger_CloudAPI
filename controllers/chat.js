@@ -25,10 +25,7 @@ const myToken = process.env.VERIFY_TOKEN;
 module.exports.getChats = async (req, res) => {
   try {
     console.log("Retriing chats from DB");
-    const allChats = await Message.find().populate({
-      path: "contact",
-      select: "name",
-    });
+    const allChats = await Message.find({});
 
     // Log the retrieved data
     console.log("Retrieved chats:", allChats);
