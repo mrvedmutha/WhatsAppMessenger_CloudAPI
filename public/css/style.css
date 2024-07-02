@@ -1,0 +1,20 @@
+.chatItem {
+  margin: 1rem 0.5rem;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.usrIcon {
+  font-size: 2rem;
+}
+.chatMsg {
+  width: 20rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.chatHeader {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
