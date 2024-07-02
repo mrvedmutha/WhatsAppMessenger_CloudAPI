@@ -27,7 +27,7 @@ mongoose
   });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/", chatRoutes);
+app.use("/", chatRoutes);
 
 app.get("/chats/new", (req, res) => {
   res.render("./chats/sendMessage.ejs");
