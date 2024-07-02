@@ -26,7 +26,7 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   });
 
-app.get("/chats", (req, res) => {
+app.get("/", (req, res) => {
   res.render("./chats/showMessages.ejs");
 });
 
