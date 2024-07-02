@@ -25,7 +25,7 @@ const myToken = process.env.VERIFY_TOKEN;
 module.exports.getChats = async (req, res) => {
   try {
     console.log("Retriing chats from DB");
-    const chats = await Message.find({});
+    const chats = await Message.find();
     console.log("Retrieved chats:", chats);
     res.render("./chats/showMessages.ejs", { chats });
   } catch (error) {
