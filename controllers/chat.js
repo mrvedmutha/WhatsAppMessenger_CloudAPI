@@ -114,7 +114,7 @@ module.exports.getChats = async (req, res) => {
       {
         $group: {
           _id: "$contact",
-          lastMessage: { $last: "$messge" },
+          lastMessage: { $last: "$message" },
           lastTimeStamp: { $last: "$createAt" },
         },
       },
