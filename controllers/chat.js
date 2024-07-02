@@ -45,6 +45,23 @@ module.exports.getChats = async (req, res) => {
   }
 };
 
+module.exports.getChatsJson = async (req, res) => {
+  try {
+    console.log("Retrieving chats from DB");
+    const allChats = await Message.find()
+      .populate({ path: "contact", select: "name" })
+      .sort({ createdAt: 1 });
+
+    // Log the retrieved data
+    console.log("Retrieved chats:", allChats);
+
+    res.json(allChats); // Respond with JSON
+  } catch (error) {
+    console.error("Error retrieving chats:", error);
+    res.sendStatus(500);
+  }
+};
+
 module.exports.sendMessage = async (req, res) => {
   const { message, from, to } = req.body; // Ensure `to` is included in the request body
 

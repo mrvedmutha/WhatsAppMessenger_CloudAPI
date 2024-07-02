@@ -6,5 +6,6 @@ router.get("/chats", chatController.getChats);
 router.post("/send", chatController.sendMessage);
 router.post("/webhook", chatController.webhook);
 router.get("/webhook", chatController.verifyWebhook);
+router.get("/chats/json", chatController.getChatsJson);
 
 module.exports = router;
