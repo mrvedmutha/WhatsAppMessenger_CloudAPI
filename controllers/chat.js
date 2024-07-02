@@ -111,7 +111,7 @@ module.exports.getChats = async (req, res) => {
   try {
     console.log("Retrieving chats from DB");
     const allChats = await Message.find()
-      .populate({ path: "contact", select: "name" })
+      .populate({ path: "contact", populate: { path: "name" } })
       .sort({ createdAt: 1 });
     res.render("chats/showMessages.ejs", { allChats });
   } catch (error) {
