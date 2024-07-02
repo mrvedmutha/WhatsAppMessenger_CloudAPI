@@ -7,8 +7,9 @@ const myToken = process.env.VERIFY_TOKEN;
 
 module.exports.getChats = async (req, res) => {
   try {
-    const chats = await Message.find().sort({ timestamp: -1 });
+    const chats = await Message.find({}).sort({ timestamp: -1 });
     res.json(chats);
+    res.render("./chats/showMessages.ejs", { chats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
