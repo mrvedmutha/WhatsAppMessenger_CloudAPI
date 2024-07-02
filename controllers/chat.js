@@ -15,7 +15,7 @@ module.exports.getChats = async (req, res) => {
   // }
   try {
     const allChats = await Message.find()
-      .populate("contact")
+      .populate({ path: "reviews", populate: { path: "waId" } })
       .sort({ timestamp: 1 });
     res.render("./chats/showMessage.ejs", { allChats });
   } catch (error) {
