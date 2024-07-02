@@ -111,13 +111,7 @@ module.exports.getChats = async (req, res) => {
   try {
     const allChats = await Message.aggregate([
       { $sort: { createdAt: -1 } },
-      {
-        $group: {
-          _id: "$contact",
-          lastMessage: { $last: "$message" },
-          lastTimeStamp: { $last: "$createAt" },
-        },
-      },
+      { $group: { _id: "$contact", lastMessage: { $last: "$$ROOT" } } },
       {
         $lookup: {
           from: "users",
