@@ -5,23 +5,33 @@ require("dotenv").config();
 const accessToken = process.env.ACCESS_TOKEN; // Add your access token here
 const myToken = process.env.VERIFY_TOKEN;
 
+// module.exports.getChats = async (req, res) => {
+//   // try {
+//   //   const chats = await Message.find().sort({ timestamp: -1 });
+//   //   res.json(chats);
+//   // } catch (error) {
+//   //   console.error("Error retrieving chats:", error);
+//   //   res.sendStatus(500);
+//   // }
+//   try {
+//     const allChats = await Message.find().sort({ timestamp: 1 });
+//     res.render("./chats/showMessage.ejs", { allChats });
+//     console.log(allChats);
+//   } catch (error) {
+//     console.error("Error retrieving chats:", error);
+//     res.sendStatus(500);
+//   }
+// };
 module.exports.getChats = async (req, res) => {
   try {
-    const chats = await Message.find({}).sort({ timestamp: -1 });
-    res.json(chats);
+    console.log("Retriing chats from DB");
+    const chats = await Message.find({});
+    console.log("Retrieved chats:", chats);
     res.render("./chats/showMessages.ejs", { chats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
   }
-  //   try {
-  //     const allChats = await Message.find().sort({ timestamp: 1 });
-  //     res.render("./chats/showMessage.ejs", { allChats });
-  //     console.log(allChats);
-  //   } catch (error) {
-  //     console.error("Error retrieving chats:", error);
-  //     res.sendStatus(500);
-  //   }
 };
 
 module.exports.sendMessage = async (req, res) => {
