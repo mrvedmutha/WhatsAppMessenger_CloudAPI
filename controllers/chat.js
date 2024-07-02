@@ -14,7 +14,9 @@ module.exports.getChats = async (req, res) => {
   //   res.sendStatus(500);
   // }
   try {
-    const allChats = await Message.find().sort({ timestamp: 1 });
+    const allChats = await Message.find()
+      .populate("contact")
+      .sort({ timestamp: 1 });
     res.render("./chats/showMessage.ejs", { allChats });
   } catch (error) {
     console.error("Error retrieving chats:", error);

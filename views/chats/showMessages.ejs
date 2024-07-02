@@ -1,12 +1,34 @@
 <% layout("./layouts/boilerplate") %>
-<div class="row conatiner p-2"> 
-    <div class="sidebar col-4 vh-100">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+<div class="row conatiner p-2">
+  <div class="sidebar col-4 vh-100">
+    <form class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <div class="usrMessages d-flex">
+      <div class="userImg">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="usrName d-flex">
+        <strong>Username</strong>
+        <p>12:00pm</p>
+      </div>
+      <div class="recentMsg">
+        <p class="messageLong">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, at,
+          labore odit repellat iusto fugiat odio dolorem necessitatibus cumque
+          soluta atque excepturi amet sit fuga dolor hic dignissimos repudiandae
+          rem.
+        </p>
+      </div>
     </div>
-    <div class="chat-area col-8 vh-100">
-        <p>2</p>
-    </div>
+  </div>
+  <div class="chat-area col-8 vh-100">
+    <p>2</p>
+  </div>
 </div>
