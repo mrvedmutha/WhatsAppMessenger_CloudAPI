@@ -22,12 +22,23 @@ const myToken = process.env.VERIFY_TOKEN;
 //     res.sendStatus(500);
 //   }
 // };
+// module.exports.getChats = async (req, res) => {
+//   try {
+//     console.log("Retriing chats from DB");
+//     const chats = await Message.find();
+//     console.log("Retrieved chats:", chats);
+//     res.render("./chats/showMessages.ejs", { chats });
+//   } catch (error) {
+//     console.error("Error retrieving chats:", error);
+//     res.sendStatus(500);
+//   }
+// };
 module.exports.getChats = async (req, res) => {
   try {
-    console.log("Retriing chats from DB");
-    const chats = await Message.find();
-    console.log("Retrieved chats:", chats);
-    res.render("./chats/showMessages.ejs", { chats });
+    const allChats = await Message.find()
+      .populate({ path: "contact", select: "name" }) // populate user name
+      .sort({ createdAt: 1 }); // assuming `createdAt` is your timestamp field
+    res.render("chats/showMessages", { allChats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
