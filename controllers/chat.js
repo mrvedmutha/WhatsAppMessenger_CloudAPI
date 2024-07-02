@@ -109,8 +109,6 @@ module.exports.verifyWebhook = (req, res) => {
 
 module.exports.getChats = async (req, res) => {
   try {
-    const shwMsg = await Message({});
-    console.log(shwMsg);
     const allChats = await Message.find({}).sort({ timestamp: 1 });
     res.json(allChats);
     res.render("./chats/showMessages.ejs", { allChats });
