@@ -5,23 +5,6 @@ require("dotenv").config();
 const accessToken = process.env.ACCESS_TOKEN; // Add your access token here
 const myToken = process.env.VERIFY_TOKEN;
 
-module.exports.getChatsJson = async (req, res) => {
-  try {
-    console.log("Retrieving chats from DB");
-    const allChats = await Message.find()
-      .populate({ path: "contact", select: "name" })
-      .sort({ createdAt: 1 });
-
-    // Log the retrieved data
-    console.log("Retrieved chats:", allChats);
-
-    res.json(allChats); // Respond with JSON
-  } catch (error) {
-    console.error("Error retrieving chats:", error);
-    res.sendStatus(500);
-  }
-};
-
 module.exports.sendMessage = async (req, res) => {
   const { message, from, to } = req.body; // Ensure `to` is included in the request body
 
@@ -126,6 +109,8 @@ module.exports.verifyWebhook = (req, res) => {
 
 module.exports.getChats = async (req, res) => {
   try {
+    const shwMsg = await Message();
+    console.log(shwMsg);
     const allChats = await Message.find().sort({ timestamp: 1 });
     res.json(allChats);
     res.render("./chats/showMessages.ejs", { allChats });
