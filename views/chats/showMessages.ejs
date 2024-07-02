@@ -10,7 +10,7 @@
       />
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-    <% if(typeof allChats !== 'undefined') { for (let allUsr of allChats) { %>
+    <% for (let allUsr of allChats) { %>
     <div class="chatItem d-flex align-items-center">
       <i class="fa-solid fa-user usrIcon mb-2 me-3"></i>
       <div class="chatDetails mb-2 flex-grow-1">
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <% } } %>
+    <% } %>
   </div>
   <div class="chat-area col-8 vh-100">
     <p>2</p>
