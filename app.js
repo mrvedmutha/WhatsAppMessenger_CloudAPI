@@ -27,9 +27,9 @@ mongoose
   });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/", (req, res) => {
-  res.render("./chats/showMessages.ejs");
-});
+// app.get("/", (req, res) => {
+//   res.render("./chats/showMessages.ejs");
+// });
 
 app.get("/chats/new", (req, res) => {
   res.render("./chats/sendMessage.ejs");
