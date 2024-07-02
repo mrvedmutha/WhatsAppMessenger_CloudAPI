@@ -10,12 +10,11 @@
       />
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-    <% for (let allUsr of allChats) { %>
     <div class="chatItem d-flex align-items-center">
       <i class="fa-solid fa-user usrIcon mb-2 me-3"></i>
       <div class="chatDetails mb-2 flex-grow-1">
         <div class="chatHeader d-flex justify-content-between">
-          <span><%= allUsr.to %></span>
+          <span>Username</span>
           <span>12:00</span>
         </div>
         <div class="chatMsg">
@@ -26,7 +25,6 @@
         </div>
       </div>
     </div>
-    <% } %>
   </div>
   <div class="chat-area col-8 vh-100">
     <p>2</p>
