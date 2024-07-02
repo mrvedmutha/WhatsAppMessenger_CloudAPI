@@ -117,7 +117,7 @@ module.exports.getChats = async (req, res) => {
     // Log the retrieved data
     console.log("Retrieved chats:", allChats);
 
-    res.render("chats/showMessage", { allChats });
+    res.render("chats/showMessages.ejs", { allChats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
     res.sendStatus(500);
