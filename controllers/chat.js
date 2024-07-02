@@ -109,10 +109,19 @@ module.exports.verifyWebhook = (req, res) => {
 
 module.exports.getChats = async (req, res) => {
   try {
-    console.log("Retrieving chats from DB");
-    const allChats = await Message.find()
-      .populate({ path: "contact", populate: { path: "name" } })
-      .sort({ createdAt: 1 });
+    const allChats = await Message.aggregate([
+      { $sort: { createdAt: -1 } },
+      { $group: { _id: "$contact", lastMessage: { $first: "$$ROOT" } } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "contactDetails",
+        },
+      },
+      { $unwind: "$contactDetails" },
+    ]);
     res.render("chats/showMessages.ejs", { allChats });
   } catch (error) {
     console.error("Error retrieving chats:", error);
